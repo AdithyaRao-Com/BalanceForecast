@@ -1,0 +1,319 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+    <!--
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#ccc" >
+
+        <!--<include
+            android:id="@+id/toolbar"
+            layout="@layout/toolbar"/>-->
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/cardView1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/activity_vertical_margin"
+            android:layout_marginBottom="@dimen/activity_vertical_margin"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"
+            android:elevation="4dp"
+            android:background="@android:color/white" >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="@dimen/activity_vertical_margin"
+                android:orientation="vertical">
+
+                <!-- start content -->
+
+                <TextView
+                    android:id="@+id/tv_recurring_id"
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="@dimen/default_margin"
+                    android:layout_gravity="start"
+                    android:text="@string/recurring_id"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textStyle="bold"/> <!-- style="@style/TextHeader" -->
+
+                <EditText
+                    android:id="@+id/et_recurring_id"
+                    android:layout_height="48dp"
+                    android:layout_width="match_parent"
+                    android:layout_gravity="fill_horizontal"
+                    android:gravity="start|center_vertical"
+                    android:ems="10"
+                    android:enabled="false"
+                    android:maxLength="10"
+                    android:hint="@string/recurring_id"
+                    android:inputType="number" >
+                    <!-- <requestFocus /> -->
+                </EditText>
+
+
+                <TextView
+                    android:id="@+id/tv_recurring_category_id"
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="@dimen/default_margin"
+                    android:layout_gravity="start"
+                    android:text="@string/recurring_category_id"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textStyle="bold"/> <!-- style="@style/TextHeader" -->
+
+                <Spinner
+                    android:id="@+id/sp_recurring_category_id"
+                    android:layout_height="48dp"
+                    android:layout_width="match_parent"
+                    android:contentDescription="@string/recurring_category_id" />
+                <!-- android:entries="@array/recurring_category_id_options" -->
+
+
+                <TextView
+                    android:id="@+id/tv_recurring_payee_id"
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="@dimen/default_margin"
+                    android:layout_gravity="start"
+                    android:text="@string/recurring_payee_id"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textStyle="bold"/> <!-- style="@style/TextHeader" -->
+
+                <Spinner
+                    android:id="@+id/sp_recurring_payee_id"
+                    android:layout_height="48dp"
+                    android:layout_width="match_parent"
+                    android:contentDescription="@string/recurring_payee_id" />
+                <!-- android:entries="@array/recurring_payee_id_options" -->
+
+
+                <TextView
+                    android:id="@+id/tv_recurring_transaction_type"
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="@dimen/default_margin"
+                    android:layout_gravity="start"
+                    android:text="@string/recurring_transaction_type"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textStyle="bold"/> <!-- style="@style/TextHeader" -->
+
+                <EditText
+                    android:id="@+id/et_recurring_transaction_type"
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_gravity="fill_horizontal"
+                    android:gravity="start|top"
+                    android:ems="10"
+                    android:enabled="true"
+                    android:maxLength="10"
+                    android:hint="@string/recurring_transaction_type"
+                    android:inputType="text" >
+                    <!-- <requestFocus /> -->
+                </EditText>
+
+
+                <TextView
+                    android:id="@+id/tv_recurring_account_id"
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="@dimen/default_margin"
+                    android:layout_gravity="start"
+                    android:text="@string/recurring_account_id"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textStyle="bold"/> <!-- style="@style/TextHeader" -->
+
+                <Spinner
+                    android:id="@+id/sp_recurring_account_id"
+                    android:layout_height="48dp"
+                    android:layout_width="match_parent"
+                    android:contentDescription="@string/recurring_account_id" />
+                <!-- android:entries="@array/recurring_account_id_options" -->
+
+
+                <TextView
+                    android:id="@+id/tv_recurring_to_account_id"
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="@dimen/default_margin"
+                    android:layout_gravity="start"
+                    android:text="@string/recurring_to_account_id"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textStyle="bold"/> <!-- style="@style/TextHeader" -->
+
+                <Spinner
+                    android:id="@+id/sp_recurring_to_account_id"
+                    android:layout_height="48dp"
+                    android:layout_width="match_parent"
+                    android:contentDescription="@string/recurring_to_account_id" />
+                <!-- android:entries="@array/recurring_to_account_id_options" -->
+
+
+                <TextView
+                    android:id="@+id/tv_recurring_start_date"
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="@dimen/default_margin"
+                    android:layout_gravity="start"
+                    android:text="@string/recurring_start_date"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textStyle="bold"/> <!-- style="@style/TextHeader" -->
+
+                <DatePicker
+                    android:id="@+id/et_recurring_start_date"
+                    android:layout_height="48dp"
+                    android:layout_width="match_parent"
+                    android:layout_gravity="fill_horizontal"
+                    android:gravity="start|center_vertical"
+                    android:ems="10"
+                    android:enabled="true"
+                    android:maxLength="10"
+                    android:hint="@string/recurring_start_date"
+                    android:inputType="numberDecimal" >
+                    <!-- <requestFocus /> -->
+                </DatePicker>
+
+
+                <TextView
+                    android:id="@+id/tv_recurring_end_date"
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="@dimen/default_margin"
+                    android:layout_gravity="start"
+                    android:text="@string/recurring_end_date"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textStyle="bold"/> <!-- style="@style/TextHeader" -->
+
+                <DatePicker
+                    android:id="@+id/et_recurring_end_date"
+                    android:layout_height="48dp"
+                    android:layout_width="match_parent"
+                    android:layout_gravity="fill_horizontal"
+                    android:gravity="start|center_vertical"
+                    android:ems="10"
+                    android:enabled="true"
+                    android:maxLength="10"
+                    android:hint="@string/recurring_end_date"
+                    android:inputType="numberDecimal" >
+                    <!-- <requestFocus /> -->
+                </DatePicker>
+
+
+                <TextView
+                    android:id="@+id/tv_recurring_notes"
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="@dimen/default_margin"
+                    android:layout_gravity="start"
+                    android:text="@string/recurring_notes"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textStyle="bold"/> <!-- style="@style/TextHeader" -->
+
+                <EditText
+                    android:id="@+id/et_recurring_notes"
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_gravity="fill_horizontal"
+                    android:gravity="start|top"
+                    android:ems="10"
+                    android:enabled="true"
+                    android:maxLength="50"
+                    android:hint="@string/recurring_notes"
+                    android:inputType="textMultiLine" >
+                    android:lines="3"
+                    <!-- <requestFocus /> -->
+                </EditText>
+
+
+                <TextView
+                    android:id="@+id/tv_recurring_creation_date"
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="@dimen/default_margin"
+                    android:layout_gravity="start"
+                    android:text="@string/recurring_creation_date"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textStyle="bold"/> <!-- style="@style/TextHeader" -->
+
+                <TextView
+                    android:id="@+id/tv_recurring_last_update_date"
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="@dimen/default_margin"
+                    android:layout_gravity="start"
+                    android:text="@string/recurring_last_update_date"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textStyle="bold"/> <!-- style="@style/TextHeader" -->
+
+
+
+                <TextView
+                    android:id="@+id/tv_recurring_amount"
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="@dimen/default_margin"
+                    android:layout_gravity="start"
+                    android:text="@string/recurring_amount"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textStyle="bold"/> <!-- style="@style/TextHeader" -->
+
+                <EditText
+                    android:id="@+id/et_recurring_amount"
+                    android:layout_height="48dp"
+                    android:layout_width="match_parent"
+                    android:layout_gravity="fill_horizontal"
+                    android:gravity="start|center_vertical"
+                    android:ems="10"
+                    android:enabled="true"
+                    android:maxLength="16"
+                    android:hint="@string/recurring_amount"
+                    android:inputType="numberDecimal" >
+                    <!-- <requestFocus /> -->
+                </EditText>
+
+
+                <TextView
+                    android:id="@+id/tv_recurring_recurring_pattern"
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="@dimen/default_margin"
+                    android:layout_gravity="start"
+                    android:text="@string/recurring_recurring_pattern"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textStyle="bold"/> <!-- style="@style/TextHeader" -->
+
+                <EditText
+                    android:id="@+id/et_recurring_recurring_pattern"
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_gravity="fill_horizontal"
+                    android:gravity="start|top"
+                    android:ems="10"
+                    android:enabled="true"
+                    android:maxLength="30"
+                    android:hint="@string/recurring_recurring_pattern"
+                    android:inputType="text" >
+                    <!-- <requestFocus /> -->
+                </EditText>
+
+
+                <!-- end content -->
+
+            </LinearLayout>
+
+        </android.support.v7.widget.CardView>
+
+    </RelativeLayout>
+    </ScrollView>
+</android.support.design.widget.CoordinatorLayout>

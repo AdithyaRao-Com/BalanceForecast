@@ -5,4 +5,68 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <string name="action_settings">Settings</string>
+    <!-- Accounts -->
+    <string name="accounts_table">accounts</string>
+    <string name="accounts_table_description">2016-07-06 19:58:39</string>
+    <string name="accounts_id">Id</string>     <!-- auto generated ID field -->
+    <string name="accounts_account_name">Account name</string>
+    <string name="accounts_account_type">Account type</string>
+    <string name="accounts_currency">Currency</string>
+    <string name="accounts_creation_date">Creation date</string>
+    <string name="accounts_last_update_date">Last update date</string>
+    <string name="accounts_account_balance">Account balance</string>
+
+    <!-- Transactions -->
+    <string name="transactions_table">transactions</string>
+    <string name="transactions_table_description"></string>
+    <string name="transactions_id">Id</string>     <!-- auto generated ID field -->
+    <string name="transactions_account_id">Account id</string>
+    <string name="transactions_transaction_type">Transaction type</string>
+    <string name="transactions_category_id">Category id</string>
+    <string name="transactions_payee_id">Payee id</string>
+    <string name="transactions_transaction_date">Transaction date</string>
+    <string name="transactions_notes">Notes</string>
+    <string name="transactions_creation_date">Creation date</string>
+    <string name="transactions_last_update_date">Last update date</string>
+    <string name="transactions_amount">Amount</string>
+    <string name="transactions_recurring_id">Recurring id</string>
+    <string name="transactions_to_account_id">To account id</string>
+    <string name="transactions_is_transfer_flag">Is transfer flag</string>
+
+    <!-- Category -->
+    <string name="category_table">category</string>
+    <string name="category_table_description"></string>
+    <string name="category_id">Id</string>     <!-- auto generated ID field -->
+    <string name="category_category_name">Category name</string>
+
+    <!-- Payee -->
+    <string name="payee_table">payee</string>
+    <string name="payee_table_description"></string>
+    <string name="payee_id">Id</string>     <!-- auto generated ID field -->
+    <string name="payee_payee_name">Payee name</string>
+
+    <!-- Transfers -->
+    <string name="transfers_table">transfers</string>
+    <string name="transfers_table_description"></string>
+    <string name="transfers_id">Id</string>     <!-- auto generated ID field -->
+    <string name="transfers_from_id">From id</string>
+    <string name="transfers_to_id">To id</string>
+    <string name="transfers_amount">Amount</string>
+
+    <!-- Recurring -->
+    <string name="recurring_table">recurring</string>
+    <string name="recurring_table_description"></string>
+    <string name="recurring_id">Id</string>     <!-- auto generated ID field -->
+    <string name="recurring_category_id">Category id</string>
+    <string name="recurring_payee_id">Payee id</string>
+    <string name="recurring_transaction_type">Transaction type</string>
+    <string name="recurring_account_id">Account id</string>
+    <string name="recurring_to_account_id">To account id</string>
+    <string name="recurring_start_date">Start date</string>
+    <string name="recurring_end_date">End date</string>
+    <string name="recurring_notes">Notes</string>
+    <string name="recurring_creation_date">Creation date</string>
+    <string name="recurring_last_update_date">Last update date</string>
+    <string name="recurring_amount">Amount</string>
+    <string name="recurring_recurring_pattern">Recurring pattern</string>
 </resources>
