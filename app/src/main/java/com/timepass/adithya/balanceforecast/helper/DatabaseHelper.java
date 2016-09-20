@@ -112,12 +112,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     // Category - Column names
     private static final String FIELD_category_id = "id";
     private static final String FIELD_category_category_name = "category_name";
+    private static final String FIELD_category_parent_category_id = "parent_category_id";
 
     // Category - Table create statement
     private static final String CREATE_TABLE_category = "CREATE TABLE " + TABLE_category +
             "(" +
             FIELD_category_id + " INTEGER PRIMARY KEY, " +
-            FIELD_category_category_name + " TEXT(30) " +
+            FIELD_category_category_name + " TEXT(30), " +
+            FIELD_category_parent_category_id + " REAL(16,0) " +
             ")";
 
 
@@ -592,6 +594,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         ContentValues values = new ContentValues();
         //values.put(FIELD_category_id, mCategory.getId());
         values.put(FIELD_category_category_name, mCategory.getCategoryName());
+        values.put(FIELD_category_parent_category_id, mCategory.getParentCategoryId());
 
         long id = 0;
 
@@ -652,6 +655,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 mCategory = new Category();
                 mCategory.setId(cur.getInt(cur.getColumnIndex(FIELD_category_id)));
                 mCategory.setCategoryName(cur.getString(cur.getColumnIndex(FIELD_category_category_name)));
+                mCategory.setParentCategoryId(cur.getInt(cur.getColumnIndex(FIELD_category_parent_category_id)));
 
             }
             cur.close();
@@ -683,6 +687,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                     Category mCategory = new Category();
                     mCategory.setId(cur.getInt(cur.getColumnIndex(FIELD_category_id)));
                     mCategory.setCategoryName(cur.getString(cur.getColumnIndex(FIELD_category_category_name)));
+                    mCategory.setParentCategoryId(cur.getInt(cur.getColumnIndex(FIELD_category_parent_category_id)));
 
                     list.add(mCategory); // adding objects to the list
 
@@ -709,13 +714,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
             map.put("category_id", String.valueOf(mCategory.getId()));
             map.put("category_category_name", mCategory.getCategoryName());
+            map.put("category_parent_category_id", String.valueOf(mCategory.getParentCategoryId()));
 
             mArrayList.add(map);
         }
 
         return mArrayList;
     }
-
 
 
     //------------------------------------

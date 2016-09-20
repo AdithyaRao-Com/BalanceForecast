@@ -10,7 +10,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:background="#ccc" >
 
         <!--<include
@@ -84,6 +84,24 @@
                     android:inputType="text" >
                     <!-- <requestFocus /> -->
                 </EditText>
+
+
+                <TextView
+                    android:id="@+id/tv_category_parent_category_id"
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="@dimen/default_margin"
+                    android:layout_gravity="start"
+                    android:text="@string/category_parent_category_id"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textStyle="bold"/> <!-- style="@style/TextHeader" -->
+
+                <Spinner
+                    android:id="@+id/sp_category_parent_category_id"
+                    android:layout_height="48dp"
+                    android:layout_width="match_parent"
+                    android:contentDescription="@string/category_parent_category_id" />
+                <!-- android:entries="@array/category_parent_category_id_options" -->
 
 
                 <!-- end content -->

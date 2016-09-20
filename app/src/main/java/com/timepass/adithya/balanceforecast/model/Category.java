@@ -9,7 +9,7 @@ public class Category {
     // private members
     private int id;
     private String categoryName;
-
+    private int parentCategoryId;
 
     /**
      * Constructor
@@ -27,9 +27,10 @@ public class Category {
      * Example:
      * Category myCategory = new Category( val1, val2,.. );
      */
-    public Category(int id, String category_name) {
+    public Category(int id, String category_name, int parentCategoryId) {
         this.setId(id);
         this.setCategoryName(category_name);
+        this.setParentCategoryId(parentCategoryId);
     }
 
 
@@ -53,7 +54,13 @@ public class Category {
         this.categoryName = category_name;
     }
 
+    public int getParentCategoryId() {
+        return parentCategoryId;
+    }
 
+    public void setParentCategoryId(int parentCategoryId) {
+        this.parentCategoryId = parentCategoryId;
+    }
 
     /**
      * Methods
@@ -64,6 +71,26 @@ public class Category {
         return "";
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Category)) return false;
+
+        Category category = (Category) o;
+
+        if (getId() != category.getId()) return false;
+        if (getParentCategoryId() != category.getParentCategoryId()) return false;
+        return getCategoryName().equals(category.getCategoryName());
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = getId();
+        result = 31 * result + getCategoryName().hashCode();
+        result = 31 * result + getParentCategoryId();
+        return result;
+    }
 }
 
 

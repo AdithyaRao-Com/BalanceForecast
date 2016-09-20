@@ -38,6 +38,7 @@
     <string name="category_table_description"></string>
     <string name="category_id">Id</string>     <!-- auto generated ID field -->
     <string name="category_category_name">Category name</string>
+    <string name="category_parent_category_id">Parent Category Id</string>
 
     <!-- Payee -->
     <string name="payee_table">payee</string>

@@ -14,7 +14,20 @@
     tools:context="com.timepass.adithya.balanceforecast.MainActivity">
 
     <TextView
-        android:text="Hello World!"
+        android:id="@+id/content_main_textview1"
+        android:text="Main Screen"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
+    <Button
+        android:id="@+id/content_main_button1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/content_main_textview1"
+        android:text="Export"/>
+    <Button
+        android:id="@+id/content_main_button2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/content_main_button1"
+        android:text="Import"/>
 </RelativeLayout>
