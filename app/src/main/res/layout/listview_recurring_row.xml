@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/listview_recurring_row_category_name"
+        android:textSize="@dimen/main_text_size"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/listview_recurring_row_payee_name"
+        android:textSize="@dimen/main_text_size"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/listview_recurring_row_transaction_type"
+        android:textSize="@dimen/main_text_size"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/listview_recurring_row_amount"
+        android:textSize="@dimen/main_text_size"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/activity_vertical_margin"
+        android:background="@color/cardview_shadow_end_color"
+        android:id="@+id/listview_recurring_row_line"
+        android:textSize="@dimen/main_text_size"/>
+</LinearLayout>

@@ -1,5 +1,7 @@
 package com.timepass.adithya.balanceforecast.model;
 
+import android.database.Cursor;
+
 /**
  * Created by Adithya Rao on 9/18/16.
  */
@@ -107,8 +109,6 @@ public class Accounts {
         this.acountBalance = account_balance;
     }
 
-
-
     /**
      * Methods
      */
@@ -117,5 +117,4 @@ public class Accounts {
     public String toString() {
         return this.accountName;
     }
-
 }

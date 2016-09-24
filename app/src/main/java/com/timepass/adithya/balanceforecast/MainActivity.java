@@ -2,6 +2,8 @@ package com.timepass.adithya.balanceforecast;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
@@ -20,6 +22,8 @@ import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.timepass.adithya.balanceforecast.helper.DatabaseHelper;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -28,14 +32,13 @@ import java.nio.channels.FileChannel;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-
+    protected DrawerLayout drawer;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -44,42 +47,13 @@ public class MainActivity extends AppCompatActivity
                         .setAction("Action", null).show();
             }
         });
-
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
             this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
         toggle.syncState();
-
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-
-        Button exportDB =  (Button) findViewById(R.id.content_main_button1);
-        exportDB.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View view)
-            {
-                try{
-                    new ExportDatabaseFileTask().execute("");
-
-                }
-                catch(Exception ex){
-                    Log.e("Error in MainActivity",ex.toString());
-                }
-            }
-        });
-        Button importDB = (Button) findViewById(R.id.content_main_button2);
-        importDB.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                try{
-                    new ImportDatabaseFileTask().execute("");
-
-                }
-                catch(Exception ex){
-                    Log.e("Error in MainActivity",ex.toString());
-                }
-            }
-        });
     }
 
     @Override
@@ -121,19 +95,47 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_accounts) {
-            // Handle the camera action
+            Intent intent = new Intent(MainActivity.this,AccountsListView.class);
+            startActivity(intent);
+            finish();
         } else if (id == R.id.nav_transactions) {
+            Intent intent = new Intent(MainActivity.this,TransactionsListView.class);
+            startActivity(intent);
+            finish();
 
         } else if (id == R.id.nav_recurring) {
-
+            Intent intent = new Intent(MainActivity.this,RecurringListView.class);
+            startActivity(intent);
+            finish();
         } else if (id == R.id.nav_category) {
-
+            Intent intent = new Intent(MainActivity.this,CategoryListView.class);
+            startActivity(intent);
+            finish();
         } else if (id == R.id.nav_payee) {
-
+            Intent intent = new Intent(MainActivity.this,PayeeListView.class);
+            startActivity(intent);
+            finish();
         } else if (id == R.id.nav_reports) {
 
         } else if (id == R.id.nav_settings) {
 
+        } else if (id == R.id.nav_export) {
+            try{
+                new ExportDatabaseFileTask().execute("");
+
+            }
+            catch(Exception ex){
+                Log.e("Error in MainActivity",ex.toString());
+            }
+
+        } else if (id == R.id.nav_import) {
+            try{
+                new ImportDatabaseFileTask().execute("");
+
+            }
+            catch(Exception ex){
+                Log.e("Error in MainActivity",ex.toString());
+            }
         }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
@@ -148,6 +150,7 @@ public class MainActivity extends AppCompatActivity
     class ExportDatabaseFileTask extends AsyncTask<String, Void, Boolean>
     {
         private final ProgressDialog dialog = new ProgressDialog(ctx);
+        private final String DATABASE_NAME = new String("dbPersonalExpense.db");
         // can use UI thread here
         @Override
         protected void onPreExecute()
@@ -158,8 +161,7 @@ public class MainActivity extends AppCompatActivity
         // automatically done on worker thread (separate from UI thread)
         protected Boolean doInBackground(final String... args)
         {
-            File dbFile = new File(Environment.getDataDirectory() +
-                    "/data/com.timepass.adithya/databases/dbPersonalExpense.db");
+            File dbFile = new File(ctx.getApplicationInfo().dataDir+"/databases/"+DATABASE_NAME);
             File exportDir = new File(Environment.getExternalStorageDirectory(), "");
             if (!exportDir.exists())
             {
@@ -220,6 +222,7 @@ public class MainActivity extends AppCompatActivity
     class ImportDatabaseFileTask extends AsyncTask<String, Void, Boolean>
     {
         private final ProgressDialog dialog = new ProgressDialog(ctx);
+        private final String DATABASE_NAME = new String("dbPersonalExpense.db");
         // can use UI thread here
         @Override
         protected void onPreExecute()
@@ -230,14 +233,9 @@ public class MainActivity extends AppCompatActivity
         // automatically done on worker thread (separate from UI thread)
         protected Boolean doInBackground(final String... args)
         {
-            File dbDir = new File(Environment.getDataDirectory() +
-                    "/data/com.timepass.adithya/databases/");
-            File importFile = new File(Environment.getExternalStorageDirectory()+"/dbPersonalExpense.db");
-            if (!dbDir.exists())
-            {
-                dbDir.mkdirs();
-            }
-            File file = new File(dbDir, "dbPersonalExpense.db");
+            File dbDir = new File(ctx.getApplicationInfo().dataDir+"/databases/");
+            File importFile = new File(Environment.getExternalStorageDirectory()+"/"+DATABASE_NAME);
+            File file = new File(dbDir, DATABASE_NAME);
             try
             {
                 file.createNewFile();

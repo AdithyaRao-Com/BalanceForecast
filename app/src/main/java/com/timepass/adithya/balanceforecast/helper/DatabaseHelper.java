@@ -46,13 +46,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String TABLE_accounts = "accounts";
 
     // Accounts - Column names
-    private static final String FIELD_accounts_id = "id";
-    private static final String FIELD_accounts_account_name = "account_name";
-    private static final String FIELD_accounts_account_type = "account_type";
-    private static final String FIELD_accounts_currency = "currency";
-    private static final String FIELD_accounts_creation_date = "creation_date";
-    private static final String FIELD_accounts_last_update_date = "last_update_date";
-    private static final String FIELD_accounts_account_balance = "account_balance";
+    public static final String FIELD_accounts_id = "id";
+    public static final String FIELD_accounts_account_name = "account_name";
+    public static final String FIELD_accounts_account_type = "account_type";
+    public static final String FIELD_accounts_currency = "currency";
+    public static final String FIELD_accounts_creation_date = "creation_date";
+    public static final String FIELD_accounts_last_update_date = "last_update_date";
+    public static final String FIELD_accounts_account_balance = "account_balance";
 
     // Accounts - Table create statement
     private static final String CREATE_TABLE_accounts = "CREATE TABLE " + TABLE_accounts +
@@ -72,19 +72,19 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String TABLE_transactions = "transactions";
 
     // Transactions - Column names
-    private static final String FIELD_transactions_id = "id";
-    private static final String FIELD_transactions_account_id = "account_id";
-    private static final String FIELD_transactions_transaction_type = "transaction_type";
-    private static final String FIELD_transactions_category_id = "category_id";
-    private static final String FIELD_transactions_payee_id = "payee_id";
-    private static final String FIELD_transactions_transaction_date = "transaction_date";
-    private static final String FIELD_transactions_notes = "notes";
-    private static final String FIELD_transactions_creation_date = "creation_date";
-    private static final String FIELD_transactions_last_update_date = "last_update_date";
-    private static final String FIELD_transactions_amount = "amount";
-    private static final String FIELD_transactions_recurring_id = "recurring_id";
-    private static final String FIELD_transactions_to_account_id = "to_account_id";
-    private static final String FIELD_transactions_is_transfer_flag = "is_transfer_flag";
+    public static final String FIELD_transactions_id = "id";
+    public static final String FIELD_transactions_account_id = "account_id";
+    public static final String FIELD_transactions_transaction_type = "transaction_type";
+    public static final String FIELD_transactions_category_id = "category_id";
+    public static final String FIELD_transactions_payee_id = "payee_id";
+    public static final String FIELD_transactions_transaction_date = "transaction_date";
+    public static final String FIELD_transactions_notes = "notes";
+    public static final String FIELD_transactions_creation_date = "creation_date";
+    public static final String FIELD_transactions_last_update_date = "last_update_date";
+    public static final String FIELD_transactions_amount = "amount";
+    public static final String FIELD_transactions_recurring_id = "recurring_id";
+    public static final String FIELD_transactions_to_account_id = "to_account_id";
+    public static final String FIELD_transactions_is_transfer_flag = "is_transfer_flag";
 
     // Transactions - Table create statement
     private static final String CREATE_TABLE_transactions = "CREATE TABLE " + TABLE_transactions +
@@ -110,9 +110,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String TABLE_category = "category";
 
     // Category - Column names
-    private static final String FIELD_category_id = "id";
-    private static final String FIELD_category_category_name = "category_name";
-    private static final String FIELD_category_parent_category_id = "parent_category_id";
+    public static final String FIELD_category_id = "id";
+    public static final String FIELD_category_category_name = "category_name";
+    public static final String FIELD_category_parent_category_id = "parent_category_id";
 
     // Category - Table create statement
     private static final String CREATE_TABLE_category = "CREATE TABLE " + TABLE_category +
@@ -128,8 +128,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String TABLE_payee = "payee";
 
     // Payee - Column names
-    private static final String FIELD_payee_id = "id";
-    private static final String FIELD_payee_payee_name = "payee_name";
+    public static final String FIELD_payee_id = "id";
+    public static final String FIELD_payee_payee_name = "payee_name";
 
     // Payee - Table create statement
     private static final String CREATE_TABLE_payee = "CREATE TABLE " + TABLE_payee +
@@ -144,10 +144,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String TABLE_transfers = "transfers";
 
     // Transfers - Column names
-    private static final String FIELD_transfers_id = "id";
-    private static final String FIELD_transfers_from_id = "from_id";
-    private static final String FIELD_transfers_to_id = "to_id";
-    private static final String FIELD_transfers_amount = "amount";
+    public static final String FIELD_transfers_id = "id";
+    public static final String FIELD_transfers_from_id = "from_id";
+    public static final String FIELD_transfers_to_id = "to_id";
+    public static final String FIELD_transfers_amount = "amount";
 
     // Transfers - Table create statement
     private static final String CREATE_TABLE_transfers = "CREATE TABLE " + TABLE_transfers +
@@ -164,19 +164,19 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String TABLE_recurring = "recurring";
 
     // Recurring - Column names
-    private static final String FIELD_recurring_id = "id";
-    private static final String FIELD_recurring_category_id = "category_id";
-    private static final String FIELD_recurring_payee_id = "payee_id";
-    private static final String FIELD_recurring_transaction_type = "transaction_type";
-    private static final String FIELD_recurring_account_id = "account_id";
-    private static final String FIELD_recurring_to_account_id = "to_account_id";
-    private static final String FIELD_recurring_start_date = "start_date";
-    private static final String FIELD_recurring_end_date = "end_date";
-    private static final String FIELD_recurring_notes = "notes";
-    private static final String FIELD_recurring_creation_date = "creation_date";
-    private static final String FIELD_recurring_last_update_date = "last_update_date";
-    private static final String FIELD_recurring_amount = "amount";
-    private static final String FIELD_recurring_recurring_pattern = "recurring_pattern";
+    public static final String FIELD_recurring_id = "id";
+    public static final String FIELD_recurring_category_id = "category_id";
+    public static final String FIELD_recurring_payee_id = "payee_id";
+    public static final String FIELD_recurring_transaction_type = "transaction_type";
+    public static final String FIELD_recurring_account_id = "account_id";
+    public static final String FIELD_recurring_to_account_id = "to_account_id";
+    public static final String FIELD_recurring_start_date = "start_date";
+    public static final String FIELD_recurring_end_date = "end_date";
+    public static final String FIELD_recurring_notes = "notes";
+    public static final String FIELD_recurring_creation_date = "creation_date";
+    public static final String FIELD_recurring_last_update_date = "last_update_date";
+    public static final String FIELD_recurring_amount = "amount";
+    public static final String FIELD_recurring_recurring_pattern = "recurring_pattern";
 
     // Recurring - Table create statement
     private static final String CREATE_TABLE_recurring = "CREATE TABLE " + TABLE_recurring +
@@ -367,6 +367,18 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return list;
     }
 
+    public Cursor getCurAccounts() {
+
+        List<Accounts> list = new ArrayList<>();
+
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        String selectQuery = "SELECT * FROM " + TABLE_accounts;
+        //Log.i(LOG, selectQuery);
+
+        Cursor cur = db.rawQuery(selectQuery, null);
+        return cur;
+    }
 
 
     /*
@@ -544,7 +556,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         return list;
     }
-
+    public Cursor getCurTransactions() {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String selectQuery = "SELECT * FROM " + TABLE_transactions;
+        Cursor cur = db.rawQuery(selectQuery, null);
+        return cur;
+    }
 
 
     /*
@@ -574,7 +591,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
             mArrayList.add(map);
         }
-
         return mArrayList;
     }
 
@@ -699,6 +715,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return list;
     }
 
+    public Cursor getCurCategory() {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String selectQuery = "SELECT * FROM " + TABLE_category;
+        //Log.i(LOG, selectQuery);
+        Cursor cur = db.rawQuery(selectQuery, null);
+        return cur;
+    }
+
 
 
     /*
@@ -731,15 +755,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
      *  create or update a payee row using an object (Model Class)
      */
     public long savePayee(Payee mPayee) {
-
         SQLiteDatabase db = this.getWritableDatabase();
-
         ContentValues values = new ContentValues();
         //values.put(FIELD_payee_id, mPayee.getId());
         values.put(FIELD_payee_payee_name, mPayee.getPayeeName());
-
         long id = 0;
-
         if (mPayee.getId() > 0) {
 
             // updating row
@@ -837,6 +857,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
 
         return list;
+    }
+
+    public Cursor getCurPayee() {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String selectQuery = "SELECT * FROM " + TABLE_payee;
+        Cursor cur = db.rawQuery(selectQuery, null);
+        return cur;
     }
 
 
@@ -985,6 +1012,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return list;
     }
 
+    public Cursor getCurTransfers() {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String selectQuery = "SELECT * FROM " + TABLE_transfers;
+        Cursor cur = db.rawQuery(selectQuery, null);
+        return cur;
+    }
 
 
     /*
@@ -1160,6 +1193,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return list;
     }
 
+    public Cursor getCurRecurring() {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String selectQuery = "SELECT * FROM " + TABLE_recurring;
+        Cursor cur = db.rawQuery(selectQuery, null);
+        return cur;
+    }
 
 
     /*
