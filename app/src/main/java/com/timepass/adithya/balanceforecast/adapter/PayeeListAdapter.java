@@ -24,7 +24,7 @@ public class PayeeListAdapter extends CursorAdapter{
     @Override
     public void bindView(View view, Context context, Cursor cursor){
         TextView payeeName = (TextView) view.findViewById(R.id.listview_payee_row_payee_name);
-        payeeName.setText(cursor.getString(cursor.getColumnIndex(DatabaseHelper.FIELD_category_category_name)));
+        payeeName.setText(cursor.getString(cursor.getColumnIndex(DatabaseHelper.FIELD_payee_payee_name)));
     }
     @Override
     public View newView(Context context, Cursor cursor, ViewGroup parent){

@@ -2,7 +2,7 @@ package com.timepass.adithya.balanceforecast;
 
 import android.os.Bundle;
 
-import com.timepass.adithya.balanceforecast.model.CustomLayoutInflater;
+import com.timepass.adithya.balanceforecast.helper.CustomLayoutInflater;
 
 public class TransactionsListView extends MainActivity {
 
@@ -13,6 +13,7 @@ public class TransactionsListView extends MainActivity {
                 ,R.layout.listview_transaction
                 ,getSupportActionBar()
                 ,getIntent()
+                ,"Transactions"
         );
     }
 }

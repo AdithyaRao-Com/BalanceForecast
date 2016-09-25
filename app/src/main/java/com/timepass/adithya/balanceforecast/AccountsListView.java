@@ -6,7 +6,7 @@ import android.widget.ListView;
 
 import com.timepass.adithya.balanceforecast.adapter.AccountsListAdapter;
 import com.timepass.adithya.balanceforecast.helper.DatabaseHelper;
-import com.timepass.adithya.balanceforecast.model.CustomLayoutInflater;
+import com.timepass.adithya.balanceforecast.helper.CustomLayoutInflater;
 
 public class AccountsListView extends MainActivity {
 
@@ -17,6 +17,7 @@ public class AccountsListView extends MainActivity {
             ,R.layout.listview_accounts
             ,getSupportActionBar()
             ,getIntent()
+            ,"Accounts"
         );
         DatabaseHelper dbhelper = new DatabaseHelper(AccountsListView.this);
         Cursor cur = dbhelper.getCurAccounts();

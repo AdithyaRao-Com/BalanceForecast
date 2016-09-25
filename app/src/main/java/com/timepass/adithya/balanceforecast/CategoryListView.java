@@ -6,7 +6,7 @@ import android.widget.ListView;
 
 import com.timepass.adithya.balanceforecast.adapter.CategoryListAdapter;
 import com.timepass.adithya.balanceforecast.helper.DatabaseHelper;
-import com.timepass.adithya.balanceforecast.model.CustomLayoutInflater;
+import com.timepass.adithya.balanceforecast.helper.CustomLayoutInflater;
 
 public class CategoryListView extends MainActivity {
 
@@ -17,6 +17,7 @@ public class CategoryListView extends MainActivity {
                 ,R.layout.listview_category
                 ,getSupportActionBar()
                 ,getIntent()
+                ,"Category"
         );
         DatabaseHelper dbhelper = new DatabaseHelper(CategoryListView.this);
         Cursor cur = dbhelper.getCurCategory();

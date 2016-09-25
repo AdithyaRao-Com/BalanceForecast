@@ -368,12 +368,15 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     public Cursor getCurAccounts() {
-
-        List<Accounts> list = new ArrayList<>();
-
         SQLiteDatabase db = this.getReadableDatabase();
-
-        String selectQuery = "SELECT * FROM " + TABLE_accounts;
+        String selectQuery = "SELECT id _id," +
+                "account_name," +
+                "account_type," +
+                "currency," +
+                "creation_date," +
+                "last_update_date," +
+                "account_balance " +
+                " FROM " + TABLE_accounts;
         //Log.i(LOG, selectQuery);
 
         Cursor cur = db.rawQuery(selectQuery, null);
@@ -558,7 +561,20 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
     public Cursor getCurTransactions() {
         SQLiteDatabase db = this.getReadableDatabase();
-        String selectQuery = "SELECT * FROM " + TABLE_transactions;
+        String selectQuery = "SELECT id," +
+                "account_id," +
+                "transaction_type," +
+                "category_id," +
+                "payee_id," +
+                "transaction_date." +
+                "notes," +
+                "creation_date," +
+                "last_update_date," +
+                "amount," +
+                "recurring_id," +
+                "to_account_id," +
+                "is_transfer_flag " +
+                " FROM " + TABLE_transactions;
         Cursor cur = db.rawQuery(selectQuery, null);
         return cur;
     }
@@ -717,7 +733,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     public Cursor getCurCategory() {
         SQLiteDatabase db = this.getReadableDatabase();
-        String selectQuery = "SELECT * FROM " + TABLE_category;
+        String selectQuery = "SELECT id _id," +
+                "category_name," +
+                "parent_category_id " +
+                " FROM " + TABLE_category;
         //Log.i(LOG, selectQuery);
         Cursor cur = db.rawQuery(selectQuery, null);
         return cur;
@@ -861,7 +880,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     public Cursor getCurPayee() {
         SQLiteDatabase db = this.getReadableDatabase();
-        String selectQuery = "SELECT * FROM " + TABLE_payee;
+        String selectQuery = "SELECT id _id," +
+                "payee_name " +
+                " FROM " + TABLE_payee;
         Cursor cur = db.rawQuery(selectQuery, null);
         return cur;
     }
@@ -1195,7 +1216,20 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     public Cursor getCurRecurring() {
         SQLiteDatabase db = this.getReadableDatabase();
-        String selectQuery = "SELECT * FROM " + TABLE_recurring;
+        String selectQuery = "SELECT id _id," +
+                "category_id," +
+                "payee_id," +
+                "transaction_type," +
+                "account_id," +
+                "to_account_id," +
+                "start_date," +
+                "end_ate," +
+                "notes," +
+                "creation_date," +
+                "last_update_date," +
+                "amount," +
+                "recurring_pattern" +
+                " FROM " + TABLE_recurring;
         Cursor cur = db.rawQuery(selectQuery, null);
         return cur;
     }
