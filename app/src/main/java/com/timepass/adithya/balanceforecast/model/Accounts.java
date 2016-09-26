@@ -1,6 +1,8 @@
 package com.timepass.adithya.balanceforecast.model;
 
 import android.database.Cursor;
+import android.os.Parcel;
+import android.os.Parcelable;
 
 /**
  * Created by Adithya Rao on 9/18/16.
@@ -10,7 +12,7 @@ import android.database.Cursor;
 *  Java - Model Class - dbPersonalExpense.accounts
 *  2016-07-06 19:58:39
 */
-public class Accounts {
+public class Accounts implements Parcelable {
 
     // private members
     private int id;
@@ -38,7 +40,13 @@ public class Accounts {
      * Example:
      * Accounts myAccounts = new Accounts( val1, val2,.. );
      */
-    public Accounts(int id, String account_name, String account_type, String currency, double creation_date, double last_update_date, double account_balance) {
+    public Accounts(int id
+            , String account_name
+            , String account_type
+            , String currency
+            , double creation_date
+            , double last_update_date
+            , double account_balance) {
         this.setId(id);
         this.setAccountName(account_name);
         this.setAccountType(account_type);
@@ -117,4 +125,43 @@ public class Accounts {
     public String toString() {
         return this.accountName;
     }
+
+    protected Accounts(Parcel in) {
+        id = in.readInt();
+        accountName = in.readString();
+        accountType = in.readString();
+        currency = in.readString();
+        creationDate = in.readDouble();
+        lastUpdateDate = in.readDouble();
+        acountBalance = in.readDouble();
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(id);
+        dest.writeString(accountName);
+        dest.writeString(accountType);
+        dest.writeString(currency);
+        dest.writeDouble(creationDate);
+        dest.writeDouble(lastUpdateDate);
+        dest.writeDouble(acountBalance);
+    }
+
+    @SuppressWarnings("unused")
+    public static final Parcelable.Creator<Accounts> CREATOR = new Parcelable.Creator<Accounts>() {
+        @Override
+        public Accounts createFromParcel(Parcel in) {
+            return new Accounts(in);
+        }
+
+        @Override
+        public Accounts[] newArray(int size) {
+            return new Accounts[size];
+        }
+    };
 }

@@ -24,7 +24,11 @@ public class AccountsListAdapter extends CursorAdapter{
     @Override
     public void bindView(View view, Context context, Cursor cursor){
         TextView accountName = (TextView) view.findViewById(R.id.listview_accounts_row_account_name);
+        TextView accountBalance = (TextView) view.findViewById(R.id.listview_accounts_row_account_balance);
+        TextView accountCurr = (TextView) view.findViewById(R.id.listview_accounts_row_account_currency);
         accountName.setText(cursor.getString(cursor.getColumnIndex(DatabaseHelper.FIELD_accounts_account_name)));
+        accountBalance.setText(cursor.getString(cursor.getColumnIndex(DatabaseHelper.FIELD_accounts_account_balance)));
+        accountCurr.setText(cursor.getString(cursor.getColumnIndex(DatabaseHelper.FIELD_accounts_currency)));
     }
     @Override
     public View newView(Context context, Cursor cursor, ViewGroup parent){

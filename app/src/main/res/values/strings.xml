@@ -70,4 +70,18 @@
     <string name="recurring_last_update_date">Last update date</string>
     <string name="recurring_amount">Amount</string>
     <string name="recurring_recurring_pattern">Recurring pattern</string>
+
+    <!-- Spinners -->
+    <string-array name="account_type">
+        <item>Bank Account</item>
+        <item>Cash</item>
+        <item>Credit Card</item>
+        <item>Other</item>
+    </string-array>
+    <string-array name="currency">
+        <item>INR</item>
+        <item>USD</item>
+        <item>GBP</item>
+        <item>EUR</item>
+    </string-array>
 </resources>

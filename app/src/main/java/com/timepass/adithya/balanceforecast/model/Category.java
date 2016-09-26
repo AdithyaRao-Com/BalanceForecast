@@ -1,10 +1,13 @@
 package com.timepass.adithya.balanceforecast.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 /*
 *  Java - Model Class - dbPersonalExpense.category
 *
 */
-public class Category {
+public class Category implements Parcelable {
 
     // private members
     private int id;
@@ -91,6 +94,35 @@ public class Category {
         result = 31 * result + getParentCategoryId();
         return result;
     }
+
+    protected Category(Parcel in) {
+        id = in.readInt();
+        categoryName = in.readString();
+        parentCategoryId = in.readInt();
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(id);
+        dest.writeString(categoryName);
+        dest.writeInt(parentCategoryId);
+    }
+
+    @SuppressWarnings("unused")
+    public static final Parcelable.Creator<Category> CREATOR = new Parcelable.Creator<Category>() {
+        @Override
+        public Category createFromParcel(Parcel in) {
+            return new Category(in);
+        }
+
+        @Override
+        public Category[] newArray(int size) {
+            return new Category[size];
+        }
+    };
 }
-
-

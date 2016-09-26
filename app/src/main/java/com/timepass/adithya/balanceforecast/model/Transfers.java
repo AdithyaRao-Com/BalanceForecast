@@ -1,5 +1,8 @@
 package com.timepass.adithya.balanceforecast.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 /**
  * Created by Adithya Rao on 9/18/16.
  */
@@ -8,7 +11,7 @@ package com.timepass.adithya.balanceforecast.model;
 *  Java - Model Class - dbPersonalExpense.transfers
 *
 */
-public class Transfers {
+public class Transfers implements Parcelable {
 
     // private members
     private int id;
@@ -88,4 +91,37 @@ public class Transfers {
         return "";
     }
 
+
+    protected Transfers(Parcel in) {
+        id = in.readInt();
+        fromId = in.readDouble();
+        toId = in.readDouble();
+        amount = in.readDouble();
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(id);
+        dest.writeDouble(fromId);
+        dest.writeDouble(toId);
+        dest.writeDouble(amount);
+    }
+
+    @SuppressWarnings("unused")
+    public static final Parcelable.Creator<Transfers> CREATOR = new Parcelable.Creator<Transfers>() {
+        @Override
+        public Transfers createFromParcel(Parcel in) {
+            return new Transfers(in);
+        }
+
+        @Override
+        public Transfers[] newArray(int size) {
+            return new Transfers[size];
+        }
+    };
 }

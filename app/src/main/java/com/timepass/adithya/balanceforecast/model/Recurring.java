@@ -1,5 +1,8 @@
 package com.timepass.adithya.balanceforecast.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 /**
  * Created by Adithya Rao on 9/18/16.
  */
@@ -8,7 +11,7 @@ package com.timepass.adithya.balanceforecast.model;
 *  Java - Model Class - dbPersonalExpense.recurring
 *
 */
-public class Recurring {
+public class Recurring implements Parcelable {
 
     // private members
     private int id;
@@ -178,4 +181,55 @@ public class Recurring {
         return "";
     }
 
+
+    protected Recurring(Parcel in) {
+        id = in.readInt();
+        categoryId = in.readDouble();
+        payeeId = in.readDouble();
+        transactionType = in.readString();
+        accountId = in.readDouble();
+        toAccountId = in.readDouble();
+        startDate = in.readDouble();
+        endDate = in.readDouble();
+        notes = in.readString();
+        creationDate = in.readDouble();
+        lastUpdateDate = in.readDouble();
+        amount = in.readDouble();
+        recurringPattern = in.readString();
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(id);
+        dest.writeDouble(categoryId);
+        dest.writeDouble(payeeId);
+        dest.writeString(transactionType);
+        dest.writeDouble(accountId);
+        dest.writeDouble(toAccountId);
+        dest.writeDouble(startDate);
+        dest.writeDouble(endDate);
+        dest.writeString(notes);
+        dest.writeDouble(creationDate);
+        dest.writeDouble(lastUpdateDate);
+        dest.writeDouble(amount);
+        dest.writeString(recurringPattern);
+    }
+
+    @SuppressWarnings("unused")
+    public static final Parcelable.Creator<Recurring> CREATOR = new Parcelable.Creator<Recurring>() {
+        @Override
+        public Recurring createFromParcel(Parcel in) {
+            return new Recurring(in);
+        }
+
+        @Override
+        public Recurring[] newArray(int size) {
+            return new Recurring[size];
+        }
+    };
 }
