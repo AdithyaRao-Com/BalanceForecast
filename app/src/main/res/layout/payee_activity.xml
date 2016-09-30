@@ -84,14 +84,26 @@
                     android:inputType="numberDecimal" >
                     <!-- <requestFocus /> -->
                 </EditText>
-
-
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+                    <Button
+                        android:id="@+id/btn_payee_activity_edit"
+                        android:text="ADD"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"/>
+                    <Button
+                        android:id="@+id/btn_payee_activity_delete"
+                        android:text="DELETE"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"/>
+                </LinearLayout>
                 <!-- end content -->
-
             </LinearLayout>
-
         </android.support.v7.widget.CardView>
-
     </RelativeLayout>
 
 </android.support.design.widget.CoordinatorLayout>

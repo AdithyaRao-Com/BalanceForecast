@@ -135,7 +135,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String CREATE_TABLE_payee = "CREATE TABLE " + TABLE_payee +
             "(" +
             FIELD_payee_id + " INTEGER PRIMARY KEY, " +
-            FIELD_payee_payee_name + " REAL(10,0) " +
+            FIELD_payee_payee_name + " TEXT(50) " +
             ")";
 
 
@@ -835,7 +835,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
                 mPayee = new Payee();
                 mPayee.setId(cur.getInt(cur.getColumnIndex(FIELD_payee_id)));
-                mPayee.setPayeeName(cur.getDouble(cur.getColumnIndex(FIELD_payee_payee_name)));
+                mPayee.setPayeeName(cur.getString(cur.getColumnIndex(FIELD_payee_payee_name)));
 
             }
             cur.close();
@@ -866,7 +866,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
                     Payee mPayee = new Payee();
                     mPayee.setId(cur.getInt(cur.getColumnIndex(FIELD_payee_id)));
-                    mPayee.setPayeeName(cur.getDouble(cur.getColumnIndex(FIELD_payee_payee_name)));
+                    mPayee.setPayeeName(cur.getString(cur.getColumnIndex(FIELD_payee_payee_name)));
 
                     list.add(mPayee); // adding objects to the list
 

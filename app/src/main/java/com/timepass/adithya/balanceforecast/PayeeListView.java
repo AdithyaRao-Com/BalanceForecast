@@ -1,12 +1,16 @@
 package com.timepass.adithya.balanceforecast;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.timepass.adithya.balanceforecast.adapter.PayeeListAdapter;
 import com.timepass.adithya.balanceforecast.helper.DatabaseHelper;
 import com.timepass.adithya.balanceforecast.helper.CustomLayoutInflater;
+import com.timepass.adithya.balanceforecast.model.Payee;
 
 public class PayeeListView extends MainActivity {
 
@@ -24,5 +28,19 @@ public class PayeeListView extends MainActivity {
         ListView payeeListView = (ListView) findViewById(R.id.listview_payee1_1);
         PayeeListAdapter payeeListAdapter = new PayeeListAdapter(this,cur);
         payeeListView.setAdapter(payeeListAdapter);
+        payeeListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                //Cursor cursor = (Cursor) parent.getAdapter().getItem(position);
+                Cursor cursor = ((PayeeListAdapter)parent.getAdapter()).getCursor();
+                cursor.moveToPosition(position);
+                Payee editPayee = new Payee();
+                editPayee.setId(cursor.getInt(cursor.getColumnIndex("_id")));
+                editPayee.setPayeeName(cursor.getString(cursor.getColumnIndex(DatabaseHelper.FIELD_payee_payee_name)));
+                Intent intent = new Intent(PayeeListView.this, PayeeAddEdit.class);
+                intent.putExtra("Payee", editPayee);
+                startActivity(intent);
+            }
+        });
     }
 }

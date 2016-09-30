@@ -15,7 +15,7 @@ public class Payee implements Parcelable {
 
     // private members
     private int id;
-    private double payeeName;
+    private String payeeName;
 
 
     /**
@@ -34,7 +34,7 @@ public class Payee implements Parcelable {
      * Example:
      * Payee myPayee = new Payee( val1, val2,.. );
      */
-    public Payee(int id, double payee_name) {
+    public Payee(int id, String payee_name) {
         this.setId(id);
         this.setPayeeName(payee_name);
     }
@@ -52,11 +52,11 @@ public class Payee implements Parcelable {
         this.id = id;
     }
 
-    public double getPayeeName() {
+    public String getPayeeName() {
         return this.payeeName;
     }
 
-    public void setPayeeName(double payee_name) {
+    public void setPayeeName(String payee_name) {
         this.payeeName = payee_name;
     }
 
@@ -74,7 +74,7 @@ public class Payee implements Parcelable {
 
     protected Payee(Parcel in) {
         id = in.readInt();
-        payeeName = in.readDouble();
+        payeeName = in.readString();
     }
 
     @Override
@@ -85,7 +85,7 @@ public class Payee implements Parcelable {
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeInt(id);
-        dest.writeDouble(payeeName);
+        dest.writeString(payeeName);
     }
 
     @SuppressWarnings("unused")
