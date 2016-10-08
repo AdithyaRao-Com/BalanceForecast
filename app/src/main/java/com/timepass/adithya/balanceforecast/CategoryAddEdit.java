@@ -39,7 +39,7 @@ public class CategoryAddEdit extends MainActivity {
         ArrayList<Category> tmpParentCategoryArray = (ArrayList) db.getAllParentCategory();
         parentCategoryArray.addAll(tmpParentCategoryArray);
         ArrayAdapter<Category> parentCategoryAdapter = new ArrayAdapter<Category>(this
-                ,android.R.layout.simple_spinner_item
+                ,android.R.layout.simple_spinner_dropdown_item
                 ,parentCategoryArray);
         spinnerParentCategory.setAdapter(parentCategoryAdapter);
         if(addEditCategory.getId() >= 0){
