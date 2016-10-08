@@ -49,4 +49,12 @@ public class CategoryListView extends MainActivity {
             }
         });
     }
+    @Override
+    protected void onFABPressed(View view){
+        Category addCategory = new Category();
+        addCategory.setId(-1);
+        Intent intent = new Intent(CategoryListView.this, CategoryAddEdit.class);
+        intent.putExtra("Category", addCategory);
+        startActivity(intent);
+    }
 }

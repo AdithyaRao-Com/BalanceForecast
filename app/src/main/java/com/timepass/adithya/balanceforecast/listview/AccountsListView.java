@@ -52,4 +52,12 @@ public class AccountsListView extends MainActivity {
             }
         });
     }
+    @Override
+    protected void onFABPressed(View view){
+        Accounts addAccount = new Accounts();
+        addAccount.setId(-1);
+        Intent intent = new Intent(AccountsListView.this, AccountsAddEdit.class);
+        intent.putExtra("Accounts", addAccount);
+        startActivity(intent);
+    }
 }

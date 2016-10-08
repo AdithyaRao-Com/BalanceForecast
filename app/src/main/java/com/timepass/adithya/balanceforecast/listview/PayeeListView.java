@@ -46,4 +46,12 @@ public class PayeeListView extends MainActivity {
             }
         });
     }
+    @Override
+    protected void onFABPressed(View view){
+        Payee addPayee = new Payee();
+        addPayee.setId(-1);
+        Intent intent = new Intent(PayeeListView.this, PayeeAddEdit.class);
+        intent.putExtra("Payee", addPayee);
+        startActivity(intent);
+    }
 }
