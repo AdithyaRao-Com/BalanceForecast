@@ -29,9 +29,7 @@ public class PayeeAddEdit extends MainActivity {
                 ,appBarString
         );
         if(addEditPayee.getId() >= 0){
-            EditText payeeIdEditText = (EditText) findViewById(R.id.et_payee_id);
             EditText payeeNameEditText = (EditText) findViewById(R.id.et_payee_payee_name);
-            payeeIdEditText.setText(String.valueOf(addEditPayee.getId()));
             payeeNameEditText.setText(String.valueOf(addEditPayee.getPayeeName()));
             Button addEditButton = (Button) findViewById(R.id.btn_payee_activity_edit);
             Button deleteButton = (Button) findViewById(R.id.btn_payee_activity_delete);

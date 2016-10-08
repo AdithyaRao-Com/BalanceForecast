@@ -702,32 +702,44 @@ public class DatabaseHelper extends SQLiteOpenHelper {
      *  getting all Category objects
      */
     public List<Category> getAllCategory() {
-
         List<Category> list = new ArrayList<>();
-
         SQLiteDatabase db = this.getReadableDatabase();
-
         String selectQuery = "SELECT * FROM " + TABLE_category;
         //Log.i(LOG, selectQuery);
-
         Cursor cur = db.rawQuery(selectQuery, null);
-
         if (cur != null) {
             if (cur.moveToFirst()) {
                 do {
-
                     Category mCategory = new Category();
                     mCategory.setId(cur.getInt(cur.getColumnIndex(FIELD_category_id)));
                     mCategory.setCategoryName(cur.getString(cur.getColumnIndex(FIELD_category_category_name)));
                     mCategory.setParentCategoryId(cur.getInt(cur.getColumnIndex(FIELD_category_parent_category_id)));
-
                     list.add(mCategory); // adding objects to the list
-
                 } while (cur.moveToNext());
             }
             cur.close();
         }
+        return list;
+    }
 
+    public List<Category> getAllParentCategory() {
+        List<Category> list = new ArrayList<>();
+        SQLiteDatabase db = this.getReadableDatabase();
+        String selectQuery = "SELECT * FROM " + TABLE_category + " WHERE "+ FIELD_category_parent_category_id + " IS NULL ";
+        //Log.i(LOG, selectQuery);
+        Cursor cur = db.rawQuery(selectQuery, null);
+        if (cur != null) {
+            if (cur.moveToFirst()) {
+                do {
+                    Category mCategory = new Category();
+                    mCategory.setId(cur.getInt(cur.getColumnIndex(FIELD_category_id)));
+                    mCategory.setCategoryName(cur.getString(cur.getColumnIndex(FIELD_category_category_name)));
+                    mCategory.setParentCategoryId(cur.getInt(cur.getColumnIndex(FIELD_category_parent_category_id)));
+                    list.add(mCategory); // adding objects to the list
+                } while (cur.moveToNext());
+            }
+            cur.close();
+        }
         return list;
     }
 
@@ -748,20 +760,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
      *  getting Category rows as mapped list for ListViews
      */
     public List<Map<String, String>> getListCategory(List<Category> list) {
-
         List<Map<String, String>> mArrayList = new ArrayList<>();
-
         for (Category mCategory : list) {
-
             HashMap<String, String> map = new HashMap<>();
-
             map.put("category_id", String.valueOf(mCategory.getId()));
             map.put("category_category_name", mCategory.getCategoryName());
             map.put("category_parent_category_id", String.valueOf(mCategory.getParentCategoryId()));
-
             mArrayList.add(map);
         }
-
         return mArrayList;
     }
 
@@ -787,12 +793,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             id = mPayee.getId();
 
         } else {
-
             // inserting row
             id = db.insert(TABLE_payee, null, values);
-
         }
-
         return id;
     }
 
@@ -802,16 +805,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
      *  delete a payee record by ID
      */
     public void deletePayee(long id) {
-
         if (id > 0) {
-
             SQLiteDatabase db = this.getWritableDatabase();
-
             // deleting row
             db.delete(TABLE_payee, FIELD_payee_id + "=?", new String[] {String.valueOf(id)});
-
         }
-
     }
 
 
@@ -820,27 +818,19 @@ public class DatabaseHelper extends SQLiteOpenHelper {
      *  getting a single Payee object by ID
      */
     public Payee getPayee(long id) {
-
         Payee mPayee = null;
-
         SQLiteDatabase db = this.getReadableDatabase();
-
         String selectQuery = "SELECT * FROM " + TABLE_payee + " WHERE " + FIELD_payee_id + "=" + id;
         //Log.i(LOG, selectQuery);
-
         Cursor cur = db.rawQuery(selectQuery, null);
-
         if (cur != null) {
             if (cur.moveToFirst()) {
-
                 mPayee = new Payee();
                 mPayee.setId(cur.getInt(cur.getColumnIndex(FIELD_payee_id)));
                 mPayee.setPayeeName(cur.getString(cur.getColumnIndex(FIELD_payee_payee_name)));
-
             }
             cur.close();
         }
-
         return mPayee;
     }
 
@@ -850,31 +840,22 @@ public class DatabaseHelper extends SQLiteOpenHelper {
      *  getting all Payee objects
      */
     public List<Payee> getAllPayee() {
-
         List<Payee> list = new ArrayList<>();
-
         SQLiteDatabase db = this.getReadableDatabase();
-
         String selectQuery = "SELECT * FROM " + TABLE_payee;
         //Log.i(LOG, selectQuery);
-
         Cursor cur = db.rawQuery(selectQuery, null);
-
         if (cur != null) {
             if (cur.moveToFirst()) {
                 do {
-
                     Payee mPayee = new Payee();
                     mPayee.setId(cur.getInt(cur.getColumnIndex(FIELD_payee_id)));
                     mPayee.setPayeeName(cur.getString(cur.getColumnIndex(FIELD_payee_payee_name)));
-
                     list.add(mPayee); // adding objects to the list
-
                 } while (cur.moveToNext());
             }
             cur.close();
         }
-
         return list;
     }
 
@@ -893,19 +874,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
      *  getting Payee rows as mapped list for ListViews
      */
     public List<Map<String, String>> getListPayee(List<Payee> list) {
-
         List<Map<String, String>> mArrayList = new ArrayList<>();
-
         for (Payee mPayee : list) {
-
             HashMap<String, String> map = new HashMap<>();
-
             map.put("payee_id", String.valueOf(mPayee.getId()));
             map.put("payee_payee_name", String.valueOf(mPayee.getPayeeName()));
-
             mArrayList.add(map);
         }
-
         return mArrayList;
     }
 
@@ -919,31 +894,21 @@ public class DatabaseHelper extends SQLiteOpenHelper {
      *  create or update a transfers row using an object (Model Class)
      */
     public long saveTransfers(Transfers mTransfers) {
-
         SQLiteDatabase db = this.getWritableDatabase();
-
         ContentValues values = new ContentValues();
         //values.put(FIELD_transfers_id, mTransfers.getId());
         values.put(FIELD_transfers_from_id, mTransfers.getFromId());
         values.put(FIELD_transfers_to_id, mTransfers.getToId());
         values.put(FIELD_transfers_amount, mTransfers.getAmount());
-
         long id = 0;
-
         if (mTransfers.getId() > 0) {
-
             // updating row
             db.update(TABLE_transfers, values, FIELD_transfers_id + "=?", new String[] {String.valueOf(mTransfers.getId())});
-
             id = mTransfers.getId();
-
         } else {
-
             // inserting row
             id = db.insert(TABLE_transfers, null, values);
-
         }
-
         return id;
     }
 
@@ -953,16 +918,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
      *  delete a transfers record by ID
      */
     public void deleteTransfers(long id) {
-
         if (id > 0) {
-
             SQLiteDatabase db = this.getWritableDatabase();
-
             // deleting row
             db.delete(TABLE_transfers, FIELD_transfers_id + "=?", new String[] {String.valueOf(id)});
-
         }
-
     }
 
 
@@ -971,29 +931,21 @@ public class DatabaseHelper extends SQLiteOpenHelper {
      *  getting a single Transfers object by ID
      */
     public Transfers getTransfers(long id) {
-
         Transfers mTransfers = null;
-
         SQLiteDatabase db = this.getReadableDatabase();
-
         String selectQuery = "SELECT * FROM " + TABLE_transfers + " WHERE " + FIELD_transfers_id + "=" + id;
         //Log.i(LOG, selectQuery);
-
         Cursor cur = db.rawQuery(selectQuery, null);
-
         if (cur != null) {
             if (cur.moveToFirst()) {
-
                 mTransfers = new Transfers();
                 mTransfers.setId(cur.getInt(cur.getColumnIndex(FIELD_transfers_id)));
                 mTransfers.setFromId(cur.getDouble(cur.getColumnIndex(FIELD_transfers_from_id)));
                 mTransfers.setToId(cur.getDouble(cur.getColumnIndex(FIELD_transfers_to_id)));
                 mTransfers.setAmount(cur.getDouble(cur.getColumnIndex(FIELD_transfers_amount)));
-
             }
             cur.close();
         }
-
         return mTransfers;
     }
 
@@ -1003,33 +955,24 @@ public class DatabaseHelper extends SQLiteOpenHelper {
      *  getting all Transfers objects
      */
     public List<Transfers> getAllTransfers() {
-
         List<Transfers> list = new ArrayList<>();
-
         SQLiteDatabase db = this.getReadableDatabase();
-
         String selectQuery = "SELECT * FROM " + TABLE_transfers;
         //Log.i(LOG, selectQuery);
-
         Cursor cur = db.rawQuery(selectQuery, null);
-
         if (cur != null) {
             if (cur.moveToFirst()) {
                 do {
-
                     Transfers mTransfers = new Transfers();
                     mTransfers.setId(cur.getInt(cur.getColumnIndex(FIELD_transfers_id)));
                     mTransfers.setFromId(cur.getDouble(cur.getColumnIndex(FIELD_transfers_from_id)));
                     mTransfers.setToId(cur.getDouble(cur.getColumnIndex(FIELD_transfers_to_id)));
                     mTransfers.setAmount(cur.getDouble(cur.getColumnIndex(FIELD_transfers_amount)));
-
                     list.add(mTransfers); // adding objects to the list
-
                 } while (cur.moveToNext());
             }
             cur.close();
         }
-
         return list;
     }
 

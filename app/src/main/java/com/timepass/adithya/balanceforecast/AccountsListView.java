@@ -31,7 +31,6 @@ public class AccountsListView extends MainActivity {
         accountListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                //Cursor cursor = (Cursor) parent.getAdapter().getItem(position);
                 Cursor cursor = ((AccountsListAdapter)parent.getAdapter()).getCursor();
                 cursor.moveToPosition(position);
                 Accounts editAccount = new Accounts();

@@ -1,7 +1,11 @@
 package com.timepass.adithya.balanceforecast.model;
 
+import android.content.Context;
 import android.os.Parcel;
 import android.os.Parcelable;
+
+import com.timepass.adithya.balanceforecast.MainActivity;
+import com.timepass.adithya.balanceforecast.helper.DatabaseHelper;
 
 /*
 *  Java - Model Class - dbPersonalExpense.category
@@ -13,6 +17,7 @@ public class Category implements Parcelable {
     private int id;
     private String categoryName;
     private int parentCategoryId;
+    private Category parentCategory;
 
     /**
      * Constructor
@@ -65,13 +70,22 @@ public class Category implements Parcelable {
         this.parentCategoryId = parentCategoryId;
     }
 
+    public Category getParentCategory(Context ctx){
+        DatabaseHelper db = new DatabaseHelper(ctx);
+        if (this.parentCategoryId >= 0) {
+            return db.getCategory(this.parentCategoryId);
+        }
+        else{
+            return new Category(-1,"",-1);
+        }
+    }
+
     /**
      * Methods
      */
-
     @Override
     public String toString() {
-        return "";
+        return categoryName;
     }
 
     @Override
