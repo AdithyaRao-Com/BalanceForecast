@@ -1,4 +1,4 @@
-package com.timepass.adithya.balanceforecast;
+package com.timepass.adithya.balanceforecast.listview;
 
 import android.content.Intent;
 import android.database.Cursor;
@@ -7,6 +7,9 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import com.timepass.adithya.balanceforecast.addeditdelete.CategoryAddEdit;
+import com.timepass.adithya.balanceforecast.MainActivity;
+import com.timepass.adithya.balanceforecast.R;
 import com.timepass.adithya.balanceforecast.adapter.CategoryListAdapter;
 import com.timepass.adithya.balanceforecast.helper.DatabaseHelper;
 import com.timepass.adithya.balanceforecast.helper.CustomLayoutInflater;
@@ -18,7 +21,7 @@ public class CategoryListView extends MainActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         new CustomLayoutInflater().inflate(this
-                ,R.layout.listview_category
+                , R.layout.listview_category
                 ,getSupportActionBar()
                 ,getIntent()
                 ,"Category"

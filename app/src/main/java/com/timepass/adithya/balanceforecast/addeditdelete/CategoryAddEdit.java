@@ -1,4 +1,4 @@
-package com.timepass.adithya.balanceforecast;
+package com.timepass.adithya.balanceforecast.addeditdelete;
 
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
@@ -6,6 +6,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 
+import com.timepass.adithya.balanceforecast.MainActivity;
+import com.timepass.adithya.balanceforecast.R;
 import com.timepass.adithya.balanceforecast.helper.CustomLayoutInflater;
 import com.timepass.adithya.balanceforecast.helper.DatabaseHelper;
 import com.timepass.adithya.balanceforecast.model.Category;
@@ -27,7 +29,7 @@ public class CategoryAddEdit extends MainActivity {
             appBarString = "Add Category";
         }
         new CustomLayoutInflater().inflate(this
-                ,R.layout.category_activity
+                , R.layout.category_activity
                 ,getSupportActionBar()
                 ,getIntent()
                 ,appBarString

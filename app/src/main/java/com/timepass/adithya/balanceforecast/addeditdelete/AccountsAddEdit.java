@@ -1,4 +1,4 @@
-package com.timepass.adithya.balanceforecast;
+package com.timepass.adithya.balanceforecast.addeditdelete;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -8,6 +8,8 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
 
+import com.timepass.adithya.balanceforecast.MainActivity;
+import com.timepass.adithya.balanceforecast.R;
 import com.timepass.adithya.balanceforecast.helper.CustomLayoutInflater;
 import com.timepass.adithya.balanceforecast.model.Accounts;
 
@@ -25,7 +27,7 @@ public class AccountsAddEdit extends MainActivity {
             appBarString = "Add Account";
         }
         new CustomLayoutInflater().inflate(this
-                ,R.layout.accounts_activity
+                , R.layout.accounts_activity
                 ,getSupportActionBar()
                 ,getIntent()
                 ,appBarString
