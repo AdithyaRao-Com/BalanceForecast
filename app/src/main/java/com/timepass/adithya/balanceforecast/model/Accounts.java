@@ -1,8 +1,10 @@
 package com.timepass.adithya.balanceforecast.model;
 
-import android.database.Cursor;
+import android.content.Context;
 import android.os.Parcel;
 import android.os.Parcelable;
+
+import com.timepass.adithya.balanceforecast.helper.DatabaseHelper;
 
 /**
  * Created by Adithya Rao on 9/18/16.
@@ -21,7 +23,7 @@ public class Accounts implements Parcelable {
     private String currency;
     private double creationDate;
     private double lastUpdateDate;
-    private double acountBalance;
+    private double accountBalance;
 
 
     /**
@@ -110,17 +112,50 @@ public class Accounts implements Parcelable {
     }
 
     public double getAccountBalance() {
-        return this.acountBalance;
+        return this.accountBalance;
     }
 
     public void setAccountBalance(double account_balance) {
-        this.acountBalance = account_balance;
+        this.accountBalance = account_balance;
     }
 
     /**
      * Methods
      */
-
+    public boolean insertUpdateAccountToDB(Context ctx){
+        DatabaseHelper db = new DatabaseHelper(ctx);
+    /******************************************************
+    *Validate account Name
+     *****************************************************/
+        this.accountName = this.accountName.trim();
+        if (this.accountName.equals("")){
+            return false;
+        }
+        int tmpAccCount = db.duplicateCheck(db.TABLE_accounts
+                            , db.FIELD_accounts_account_name
+                            , this.accountName
+                            , String.valueOf(this.id));
+        if(tmpAccCount>1){
+            return false;
+        }
+        this.id = (int) db.saveAccounts(this);
+        if(this.id > 0){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+    public boolean deleteAccountFromDB(Context ctx){
+        DatabaseHelper db = new DatabaseHelper(ctx);
+        long longId = (long) this.id;
+        if(!(this.id >0)){
+            return false;
+        } else {
+            db.deleteAccounts(longId);
+            return true;
+        }
+    }
     @Override
     public String toString() {
         return this.accountName;
@@ -133,7 +168,7 @@ public class Accounts implements Parcelable {
         currency = in.readString();
         creationDate = in.readDouble();
         lastUpdateDate = in.readDouble();
-        acountBalance = in.readDouble();
+        accountBalance = in.readDouble();
     }
 
     @Override
@@ -149,7 +184,7 @@ public class Accounts implements Parcelable {
         dest.writeString(currency);
         dest.writeDouble(creationDate);
         dest.writeDouble(lastUpdateDate);
-        dest.writeDouble(acountBalance);
+        dest.writeDouble(accountBalance);
     }
 
     @SuppressWarnings("unused")

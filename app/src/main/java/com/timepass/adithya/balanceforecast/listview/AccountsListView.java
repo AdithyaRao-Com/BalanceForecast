@@ -16,7 +16,7 @@ import com.timepass.adithya.balanceforecast.helper.CustomLayoutInflater;
 import com.timepass.adithya.balanceforecast.model.Accounts;
 
 public class AccountsListView extends MainActivity {
-
+    private AccountsListAdapter accountsListAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,7 +29,7 @@ public class AccountsListView extends MainActivity {
         DatabaseHelper dbhelper = new DatabaseHelper(AccountsListView.this);
         Cursor cur = dbhelper.getCurAccounts();
         ListView accountListView = (ListView) findViewById(R.id.listview_accounts_1);
-        AccountsListAdapter accountsListAdapter = new AccountsListAdapter(this,cur);
+        accountsListAdapter = new AccountsListAdapter(this,cur);
         accountListView.setAdapter(accountsListAdapter);
         accountListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

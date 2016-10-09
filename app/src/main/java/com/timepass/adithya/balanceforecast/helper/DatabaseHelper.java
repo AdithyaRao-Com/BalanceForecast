@@ -10,7 +10,9 @@ import com.timepass.adithya.balanceforecast.model.Payee;
 import com.timepass.adithya.balanceforecast.model.Transfers;
 import com.timepass.adithya.balanceforecast.model.Recurring;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
 import java.util.Map;
@@ -244,7 +246,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
      *  create or update a accounts row using an object (Model Class)
      */
     public long saveAccounts(Accounts mAccounts) {
-
+        Date date = new Date();
+        String modifiedDate= new SimpleDateFormat("yyyyMMdd").format(date);
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
@@ -252,19 +255,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         values.put(FIELD_accounts_account_name, mAccounts.getAccountName());
         values.put(FIELD_accounts_account_type, mAccounts.getAccountType());
         values.put(FIELD_accounts_currency, mAccounts.getCurrency());
-        values.put(FIELD_accounts_creation_date, mAccounts.getCreationDate());
-        values.put(FIELD_accounts_last_update_date, mAccounts.getLastUpdateDate());
+        values.put(FIELD_accounts_last_update_date, modifiedDate);
         values.put(FIELD_accounts_account_balance, mAccounts.getAccountBalance());
-
         long id = 0;
-
         if (mAccounts.getId() > 0) {
-
             // updating row
+            values.put(FIELD_accounts_creation_date, modifiedDate);
             db.update(TABLE_accounts, values, FIELD_accounts_id + "=?", new String[] {String.valueOf(mAccounts.getId())});
-
             id = mAccounts.getId();
-
         } else {
 
             // inserting row
@@ -275,6 +273,23 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return id;
     }
 
+    public int duplicateCheck(String tableName
+            ,String columnName
+            ,String dataString
+            ,String idCheck){
+        int countInt = 0;
+        SQLiteDatabase db = this.getReadableDatabase();
+        String selectQuery = "SELECT COUNT(1) dup_check "+
+                " FROM " + tableName +
+                " WHERE "+ columnName + " =? "+
+                " AND id <> ?";
+
+        Cursor cur = db.rawQuery(selectQuery, new String[] { dataString, idCheck});
+        if (cur.moveToFirst()) {
+            countInt = cur.getInt(cur.getColumnIndex("dup_check"));
+        }
+        return countInt;
+    }
 
 
     /*
