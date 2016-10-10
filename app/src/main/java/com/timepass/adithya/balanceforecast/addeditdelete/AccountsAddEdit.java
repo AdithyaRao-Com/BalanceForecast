@@ -34,19 +34,30 @@ public class AccountsAddEdit extends MainActivity {
         else{
             appBarString = "Add Account";
         }
+/***************************************************************************************************
+ *     SET THE NEW CUSTOM LAYOUT
+ **************************************************************************************************/
         new CustomLayoutInflater().inflate(this
                 , R.layout.accounts_activity
                 ,getSupportActionBar()
                 ,getIntent()
                 ,appBarString
         );
+/***************************************************************************************************
+ *     SET THE R.ID FIELDS
+ **************************************************************************************************/
+        accountTypeSpinner = (Spinner) findViewById(R.id.sp_accounts_account_type);
+        currencySpinner = (Spinner) findViewById(R.id.sp_accounts_currency);
+        accountNameEditText = (EditText) findViewById(R.id.et_accounts_account_name);
+        accountBalanceEditText = (EditText) findViewById(R.id.et_accounts_account_balance);
+        ArrayAdapter<CharSequence> accountAdapter = (ArrayAdapter) accountTypeSpinner.getAdapter();
+        ArrayAdapter<CharSequence> currencyAdapter = (ArrayAdapter) currencySpinner.getAdapter();
+        addEditButton = (Button)findViewById(R.id.btn_accounts_activity_edit);
+        deleteButton = (Button)findViewById(R.id.btn_accounts_activity_delete);
+/***************************************************************************************************
+ *     SET FIELDS ON EDIT MODE AND CLEAR FIELDS ON INSERT MODE
+ **************************************************************************************************/
         if(addEditAccount.getId() >= 0){
-            accountTypeSpinner = (Spinner) findViewById(R.id.sp_accounts_account_type);
-            currencySpinner = (Spinner) findViewById(R.id.sp_accounts_currency);
-            accountNameEditText = (EditText) findViewById(R.id.et_accounts_account_name);
-            accountBalanceEditText = (EditText) findViewById(R.id.et_accounts_account_balance);
-            ArrayAdapter<CharSequence> accountAdapter = (ArrayAdapter) accountTypeSpinner.getAdapter();
-            ArrayAdapter<CharSequence> currencyAdapter = (ArrayAdapter) currencySpinner.getAdapter();
             if (!addEditAccount.getCurrency().equals(null)) {
                 int spinnerPosition = currencyAdapter.getPosition(addEditAccount.getCurrency());
                 currencySpinner.setSelection(spinnerPosition);
@@ -57,16 +68,15 @@ public class AccountsAddEdit extends MainActivity {
             }
             accountNameEditText.setText(addEditAccount.getAccountName());
             accountBalanceEditText.setText(String.valueOf(addEditAccount.getAccountBalance()));
-            addEditButton = (Button)findViewById(R.id.btn_accounts_activity_edit);
-            deleteButton = (Button)findViewById(R.id.btn_accounts_activity_delete);
             addEditButton.setText("EDIT");
             deleteButton.setEnabled(true);
         } else{
-            addEditButton = (Button) findViewById(R.id.btn_accounts_activity_edit);
-            deleteButton = (Button) findViewById(R.id.btn_accounts_activity_delete);
             addEditButton.setText("ADD");
             deleteButton.setEnabled(false);
         }
+/***************************************************************************************************
+ *     SET THE ACTIONS ON THE CLICK OF THE ADD or EDIT BUTTON
+ **************************************************************************************************/
         addEditButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -80,6 +90,9 @@ public class AccountsAddEdit extends MainActivity {
                 }
             }
         });
+/***************************************************************************************************
+ *     SET THE ACTIONS ON THE CLICK OF THE DELETE BUTTON
+ **************************************************************************************************/
         deleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

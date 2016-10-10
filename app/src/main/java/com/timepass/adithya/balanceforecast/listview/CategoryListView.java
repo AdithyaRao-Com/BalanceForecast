@@ -16,7 +16,9 @@ import com.timepass.adithya.balanceforecast.helper.CustomLayoutInflater;
 import com.timepass.adithya.balanceforecast.model.Category;
 
 public class CategoryListView extends MainActivity {
-
+    private ListView categoryListView;
+    private CategoryListAdapter categoryListAdapter;
+    private DatabaseHelper dbhelper;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,10 +28,8 @@ public class CategoryListView extends MainActivity {
                 ,getIntent()
                 ,"Category"
         );
-        DatabaseHelper dbhelper = new DatabaseHelper(CategoryListView.this);
-        Cursor cur = dbhelper.getCurCategory();
-        ListView categoryListView = (ListView) findViewById(R.id.listview_category_1);
-        CategoryListAdapter categoryListAdapter = new CategoryListAdapter(this,cur);
+        categoryListView = (ListView) findViewById(R.id.listview_category_1);
+        categoryListAdapter = new CategoryListAdapter(this,this.getData());
         categoryListView.setAdapter(categoryListAdapter);
         categoryListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -56,5 +56,25 @@ public class CategoryListView extends MainActivity {
         Intent intent = new Intent(CategoryListView.this, CategoryAddEdit.class);
         intent.putExtra("Category", addCategory);
         startActivity(intent);
+    }
+    @Override
+    protected void onPause() {
+        super.onPause();
+        categoryListAdapter.notifyDataSetInvalidated();
+        categoryListAdapter.changeCursor(null);
+    }
+
+    @Override
+    protected void onResume(){
+        super.onResume();
+        Cursor cur = this.getData();
+        categoryListAdapter.changeCursor(cur);
+    }
+
+    protected Cursor getData(){
+        DatabaseHelper db = new DatabaseHelper(CategoryListView.this);
+        dbhelper = db;
+        Cursor cur = dbhelper.getCurCategory();
+        return cur;
     }
 }

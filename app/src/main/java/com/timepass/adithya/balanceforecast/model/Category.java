@@ -83,6 +83,41 @@ public class Category implements Parcelable {
     /**
      * Methods
      */
+    public boolean insertUpdateAccountToDB(Context ctx){
+        DatabaseHelper db = new DatabaseHelper(ctx);
+        /******************************************************
+         *Validate category Name
+         *****************************************************/
+        this.categoryName = this.categoryName.trim();
+        if (this.categoryName.equals("")){
+            return false;
+        }
+        int tmpAccCount = db.duplicateCheck(db.TABLE_category
+                , db.FIELD_category_category_name
+                , this.categoryName
+                , String.valueOf(this.id));
+        if(tmpAccCount>1){
+            return false;
+        }
+        this.id = (int) db.saveCategory(this);
+        if(this.id > 0){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+    public boolean deleteAccountFromDB(Context ctx){
+        DatabaseHelper db = new DatabaseHelper(ctx);
+        long longId = (long) this.id;
+        if(!(this.id >0)){
+            return false;
+        } else {
+            db.deleteCategory(longId);
+            return true;
+        }
+    }
+
     @Override
     public String toString() {
         return categoryName;

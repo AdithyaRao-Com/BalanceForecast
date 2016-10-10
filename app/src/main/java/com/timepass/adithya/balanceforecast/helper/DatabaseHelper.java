@@ -256,15 +256,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         values.put(FIELD_accounts_account_type, mAccounts.getAccountType());
         values.put(FIELD_accounts_currency, mAccounts.getCurrency());
         values.put(FIELD_accounts_last_update_date, modifiedDate);
+        values.put(FIELD_accounts_creation_date, modifiedDate);
         values.put(FIELD_accounts_account_balance, mAccounts.getAccountBalance());
         long id = 0;
         if (mAccounts.getId() > 0) {
             // updating row
-            values.put(FIELD_accounts_creation_date, modifiedDate);
             db.update(TABLE_accounts, values, FIELD_accounts_id + "=?", new String[] {String.valueOf(mAccounts.getId())});
             id = mAccounts.getId();
         } else {
-
             // inserting row
             id = db.insert(TABLE_accounts, null, values);
 
@@ -639,26 +638,18 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
-        //values.put(FIELD_category_id, mCategory.getId());
         values.put(FIELD_category_category_name, mCategory.getCategoryName());
         values.put(FIELD_category_parent_category_id, mCategory.getParentCategoryId());
-
         long id = 0;
-
         if (mCategory.getId() > 0) {
-
             // updating row
             db.update(TABLE_category, values, FIELD_category_id + "=?", new String[] {String.valueOf(mCategory.getId())});
-
             id = mCategory.getId();
 
         } else {
-
             // inserting row
             id = db.insert(TABLE_category, null, values);
-
         }
-
         return id;
     }
 

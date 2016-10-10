@@ -16,7 +16,9 @@ import com.timepass.adithya.balanceforecast.helper.CustomLayoutInflater;
 import com.timepass.adithya.balanceforecast.model.Payee;
 
 public class PayeeListView extends MainActivity {
-
+    private ListView payeeListView;
+    private PayeeListAdapter payeeListAdapter;
+    private DatabaseHelper dbhelper;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,10 +28,8 @@ public class PayeeListView extends MainActivity {
                 ,getIntent()
                 ,"Payee"
         );
-        DatabaseHelper dbhelper = new DatabaseHelper(PayeeListView.this);
-        Cursor cur = dbhelper.getCurPayee();
-        ListView payeeListView = (ListView) findViewById(R.id.listview_payee1_1);
-        PayeeListAdapter payeeListAdapter = new PayeeListAdapter(this,cur);
+        payeeListView = (ListView) findViewById(R.id.listview_payee1_1);
+        payeeListAdapter = new PayeeListAdapter(this,this.getData());
         payeeListView.setAdapter(payeeListAdapter);
         payeeListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -53,5 +53,25 @@ public class PayeeListView extends MainActivity {
         Intent intent = new Intent(PayeeListView.this, PayeeAddEdit.class);
         intent.putExtra("Payee", addPayee);
         startActivity(intent);
+    }
+    @Override
+    protected void onPause() {
+        super.onPause();
+        payeeListAdapter.notifyDataSetInvalidated();
+        payeeListAdapter.changeCursor(null);
+    }
+
+    @Override
+    protected void onResume(){
+        super.onResume();
+        Cursor cur = this.getData();
+        payeeListAdapter.changeCursor(cur);
+    }
+
+    protected Cursor getData(){
+        DatabaseHelper db = new DatabaseHelper(PayeeListView.this);
+        dbhelper = db;
+        Cursor cur = dbhelper.getCurPayee();
+        return cur;
     }
 }

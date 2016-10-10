@@ -16,7 +16,9 @@ import com.timepass.adithya.balanceforecast.helper.CustomLayoutInflater;
 import com.timepass.adithya.balanceforecast.model.Accounts;
 
 public class AccountsListView extends MainActivity {
+    private ListView accountListView;
     private AccountsListAdapter accountsListAdapter;
+    private DatabaseHelper dbhelper;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,10 +28,9 @@ public class AccountsListView extends MainActivity {
             ,getIntent()
             ,"Accounts"
         );
-        DatabaseHelper dbhelper = new DatabaseHelper(AccountsListView.this);
-        Cursor cur = dbhelper.getCurAccounts();
-        ListView accountListView = (ListView) findViewById(R.id.listview_accounts_1);
-        accountsListAdapter = new AccountsListAdapter(this,cur);
+        accountListView = (ListView) findViewById(R.id.listview_accounts_1);
+        accountListView = (ListView) findViewById(R.id.listview_accounts_1);
+        accountsListAdapter = new AccountsListAdapter(this,this.getData());
         accountListView.setAdapter(accountsListAdapter);
         accountListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -59,5 +60,25 @@ public class AccountsListView extends MainActivity {
         Intent intent = new Intent(AccountsListView.this, AccountsAddEdit.class);
         intent.putExtra("Accounts", addAccount);
         startActivity(intent);
+    }
+    @Override
+    protected void onPause() {
+        super.onPause();
+        accountsListAdapter.notifyDataSetInvalidated();
+        accountsListAdapter.changeCursor(null);
+    }
+
+    @Override
+    protected void onResume(){
+        super.onResume();
+        Cursor cur = this.getData();
+        accountsListAdapter.changeCursor(cur);
+    }
+
+    protected Cursor getData(){
+        DatabaseHelper db = new DatabaseHelper(AccountsListView.this);
+        dbhelper = db;
+        Cursor cur = dbhelper.getCurAccounts();
+        return cur;
     }
 }
