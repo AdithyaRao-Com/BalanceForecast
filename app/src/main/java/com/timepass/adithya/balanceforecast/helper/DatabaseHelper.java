@@ -3,29 +3,29 @@ package com.timepass.adithya.balanceforecast.helper;
 /**
  * Created by Adithya Rao on 9/18/16.
  */
-import com.timepass.adithya.balanceforecast.model.Accounts;
-import com.timepass.adithya.balanceforecast.model.Transactions;
-import com.timepass.adithya.balanceforecast.model.Category;
-import com.timepass.adithya.balanceforecast.model.Payee;
-import com.timepass.adithya.balanceforecast.model.Transfers;
-import com.timepass.adithya.balanceforecast.model.Recurring;
-
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.HashMap;
-import java.util.Map;
-//import java.util.Date;
-//import java.util.Locale;
-//import java.sql.*;
-//import java.text.SimpleDateFormat;
 
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+
+import com.timepass.adithya.balanceforecast.model.Accounts;
+import com.timepass.adithya.balanceforecast.model.Category;
+import com.timepass.adithya.balanceforecast.model.Payee;
+import com.timepass.adithya.balanceforecast.model.Recurring;
+import com.timepass.adithya.balanceforecast.model.Transactions;
+
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+//import java.util.Date;
+//import java.util.Locale;
+//import java.sql.*;
 //import android.util.Log;
 
 
@@ -140,28 +140,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             FIELD_payee_payee_name + " TEXT(50) " +
             ")";
 
-
-
-    // Transfers - Table name
-    public static final String TABLE_transfers = "transfers";
-
-    // Transfers - Column names
-    public static final String FIELD_transfers_id = "id";
-    public static final String FIELD_transfers_from_id = "from_id";
-    public static final String FIELD_transfers_to_id = "to_id";
-    public static final String FIELD_transfers_amount = "amount";
-
-    // Transfers - Table create statement
-    private static final String CREATE_TABLE_transfers = "CREATE TABLE " + TABLE_transfers +
-            "(" +
-            FIELD_transfers_id + " INTEGER PRIMARY KEY, " +
-            FIELD_transfers_from_id + " REAL(10,0), " +
-            FIELD_transfers_to_id + " REAL(10,0), " +
-            FIELD_transfers_amount + " REAL(16,2) " +
-            ")";
-
-
-
     // Recurring - Table name
     public static final String TABLE_recurring = "recurring";
 
@@ -216,7 +194,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL(CREATE_TABLE_transactions);
         db.execSQL(CREATE_TABLE_category);
         db.execSQL(CREATE_TABLE_payee);
-        db.execSQL(CREATE_TABLE_transfers);
         db.execSQL(CREATE_TABLE_recurring);
     }
 
@@ -889,130 +866,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
         return mArrayList;
     }
-
-
-
-    //------------------------------------
-    // TRANSFERS - OPERATIONS
-    //------------------------------------
-
-    /*
-     *  create or update a transfers row using an object (Model Class)
-     */
-    public long saveTransfers(Transfers mTransfers) {
-        SQLiteDatabase db = this.getWritableDatabase();
-        ContentValues values = new ContentValues();
-        //values.put(FIELD_transfers_id, mTransfers.getId());
-        values.put(FIELD_transfers_from_id, mTransfers.getFromId());
-        values.put(FIELD_transfers_to_id, mTransfers.getToId());
-        values.put(FIELD_transfers_amount, mTransfers.getAmount());
-        long id = 0;
-        if (mTransfers.getId() > 0) {
-            // updating row
-            db.update(TABLE_transfers, values, FIELD_transfers_id + "=?", new String[] {String.valueOf(mTransfers.getId())});
-            id = mTransfers.getId();
-        } else {
-            // inserting row
-            id = db.insert(TABLE_transfers, null, values);
-        }
-        return id;
-    }
-
-
-
-    /*
-     *  delete a transfers record by ID
-     */
-    public void deleteTransfers(long id) {
-        if (id > 0) {
-            SQLiteDatabase db = this.getWritableDatabase();
-            // deleting row
-            db.delete(TABLE_transfers, FIELD_transfers_id + "=?", new String[] {String.valueOf(id)});
-        }
-    }
-
-
-
-    /*
-     *  getting a single Transfers object by ID
-     */
-    public Transfers getTransfers(long id) {
-        Transfers mTransfers = null;
-        SQLiteDatabase db = this.getReadableDatabase();
-        String selectQuery = "SELECT * FROM " + TABLE_transfers + " WHERE " + FIELD_transfers_id + "=" + id;
-        //Log.i(LOG, selectQuery);
-        Cursor cur = db.rawQuery(selectQuery, null);
-        if (cur != null) {
-            if (cur.moveToFirst()) {
-                mTransfers = new Transfers();
-                mTransfers.setId(cur.getInt(cur.getColumnIndex(FIELD_transfers_id)));
-                mTransfers.setFromId(cur.getDouble(cur.getColumnIndex(FIELD_transfers_from_id)));
-                mTransfers.setToId(cur.getDouble(cur.getColumnIndex(FIELD_transfers_to_id)));
-                mTransfers.setAmount(cur.getDouble(cur.getColumnIndex(FIELD_transfers_amount)));
-            }
-            cur.close();
-        }
-        return mTransfers;
-    }
-
-
-
-    /*
-     *  getting all Transfers objects
-     */
-    public List<Transfers> getAllTransfers() {
-        List<Transfers> list = new ArrayList<>();
-        SQLiteDatabase db = this.getReadableDatabase();
-        String selectQuery = "SELECT * FROM " + TABLE_transfers;
-        //Log.i(LOG, selectQuery);
-        Cursor cur = db.rawQuery(selectQuery, null);
-        if (cur != null) {
-            if (cur.moveToFirst()) {
-                do {
-                    Transfers mTransfers = new Transfers();
-                    mTransfers.setId(cur.getInt(cur.getColumnIndex(FIELD_transfers_id)));
-                    mTransfers.setFromId(cur.getDouble(cur.getColumnIndex(FIELD_transfers_from_id)));
-                    mTransfers.setToId(cur.getDouble(cur.getColumnIndex(FIELD_transfers_to_id)));
-                    mTransfers.setAmount(cur.getDouble(cur.getColumnIndex(FIELD_transfers_amount)));
-                    list.add(mTransfers); // adding objects to the list
-                } while (cur.moveToNext());
-            }
-            cur.close();
-        }
-        return list;
-    }
-
-    public Cursor getCurTransfers() {
-        SQLiteDatabase db = this.getReadableDatabase();
-        String selectQuery = "SELECT * FROM " + TABLE_transfers;
-        Cursor cur = db.rawQuery(selectQuery, null);
-        return cur;
-    }
-
-
-    /*
-     *  getting Transfers rows as mapped list for ListViews
-     */
-    public List<Map<String, String>> getListTransfers(List<Transfers> list) {
-
-        List<Map<String, String>> mArrayList = new ArrayList<>();
-
-        for (Transfers mTransfers : list) {
-
-            HashMap<String, String> map = new HashMap<>();
-
-            map.put("transfers_id", String.valueOf(mTransfers.getId()));
-            map.put("transfers_from_id", String.valueOf(mTransfers.getFromId()));
-            map.put("transfers_to_id", String.valueOf(mTransfers.getToId()));
-            map.put("transfers_amount", String.valueOf(mTransfers.getAmount()));
-
-            mArrayList.add(map);
-        }
-
-        return mArrayList;
-    }
-
-
 
     //------------------------------------
     // RECURRING - OPERATIONS

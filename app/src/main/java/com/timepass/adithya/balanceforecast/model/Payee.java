@@ -1,7 +1,10 @@
 package com.timepass.adithya.balanceforecast.model;
 
+import android.content.Context;
 import android.os.Parcel;
 import android.os.Parcelable;
+
+import com.timepass.adithya.balanceforecast.helper.DatabaseHelper;
 
 /**
  * Created by Adithya Rao on 9/18/16.
@@ -65,7 +68,40 @@ public class Payee implements Parcelable {
     /**
      * Methods
      */
-
+    public boolean insertUpdateAccountToDB(Context ctx){
+        DatabaseHelper db = new DatabaseHelper(ctx);
+        /******************************************************
+         *Validate category Name
+         *****************************************************/
+        this.payeeName = this.payeeName.trim();
+        if (this.payeeName.equals("")){
+            return false;
+        }
+        int tmpAccCount = db.duplicateCheck(db.TABLE_payee
+                , db.FIELD_payee_payee_name
+                , this.payeeName
+                , String.valueOf(this.id));
+        if(tmpAccCount>1){
+            return false;
+        }
+        this.id = (int) db.savePayee(this);
+        if(this.id > 0){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+    public boolean deleteAccountFromDB(Context ctx){
+        DatabaseHelper db = new DatabaseHelper(ctx);
+        long longId = (long) this.id;
+        if(!(this.id >0)){
+            return false;
+        } else {
+            db.deleteCategory(longId);
+            return true;
+        }
+    }
     @Override
     public String toString() {
         return "";

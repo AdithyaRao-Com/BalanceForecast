@@ -52,7 +52,8 @@
                         android:enabled="true"
                         android:maxLength="50"
                         android:hint="@string/accounts_account_name"
-                        android:inputType="text" >
+                        android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 "
+                        android:inputType="textCapCharacters">
                         <!-- <requestFocus /> -->
                     </EditText>
                     <TextView
