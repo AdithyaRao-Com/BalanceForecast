@@ -708,7 +708,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public List<Category> getAllParentCategory() {
         List<Category> list = new ArrayList<>();
         SQLiteDatabase db = this.getReadableDatabase();
-        String selectQuery = "SELECT * FROM " + TABLE_category + " WHERE "+ FIELD_category_parent_category_id + " IS NULL ";
+        String selectQuery = "SELECT * FROM " + TABLE_category + " WHERE IFNULL("+ FIELD_category_parent_category_id + ",-1) =-1";
         //Log.i(LOG, selectQuery);
         Cursor cur = db.rawQuery(selectQuery, null);
         if (cur != null) {
